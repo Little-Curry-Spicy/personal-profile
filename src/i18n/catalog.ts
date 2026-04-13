@@ -1,5 +1,6 @@
 import type { TExperience, TProject } from '@/types';
 import { beijing, hangzhou, zhengzhou } from '@/assets';
+import { config } from '@/constants/config';
 
 /** 作品卡片配图：与各自仓库 README 中 pic*.png 一致 */
 const GH_RAW = 'https://raw.githubusercontent.com/Little-Curry-Spicy';
@@ -44,16 +45,17 @@ export type ContactFormField = {
 export type SiteCatalog = {
   hero: {
     roles: [string, string];
-    badge: string;
-    caption: string;
     githubLabel: string;
+    wechatLabel: string;
   };
-  about: { h2: string; content: string };
+  about: { h2: string; content: string; quote: string; quoteAttribution: string };
   experience: { title: string };
   tech: { title: string; groups: TSkillGroup[] };
   works: { title: string; content: string; source: string; preview: string };
   contact: {
     h2: string;
+    /** 表单上方快捷联系方式说明 */
+    quickLinksIntro: string;
     form: {
       name: ContactFormField;
       email: ContactFormField;
@@ -189,10 +191,9 @@ const skillGroupsEn: TSkillGroup[] = [
 
 const zhCatalog: SiteCatalog = {
   hero: {
-    roles: ['前端创作者', 'Web3 产品协作开发者'],
-    badge: 'Web2 + Web3 Builder · 7 Years',
-    caption: 'Building thoughtful AI and Web3 products with clean user experience.',
+    roles: ['全栈 + Web3 + AI 探索者', ''],
     githubLabel: 'GitHub / Little-Curry-Spicy',
+    wechatLabel: `微信 · ${config.links.wechatId}`,
   },
   about: {
     h2: '关于我.',
@@ -201,6 +202,8 @@ const zhCatalog: SiteCatalog = {
 毕业后我做过一段时间电气。那行又累、安全风险也高，收入却一般，思来想去还是决定转行。我去了郑州，在达内参加前端培训——也正是在那里，我认识了现在的爱人。培训结束后，我进了一家小公司做前端：当时全公司只有我一个前端，没有现在这样的 AI 辅助，也不认识多少能请教的“大佬”，很多坑只能自己下班、周末一点点查资料、啃文档。幸运的是同事和后端伙伴愿意一起加班琢磨，老板也常鼓励我不要停下学习。
 
 后来因为郑州的薪资天花板更明显，我来了杭州：收入比在郑州时好了不少，房价也更高，所以至今还租房住；但地铁方便、气候舒服，这座城市让我愿意长期待下去。从 2022 年起我在一家政企相关公司做前端，几年里陆续交付了不少项目；我也在一灯科技的课程里系统补过 Web3，结业后进入现在这家公司，做交易所相关方向。最近在研究 AI Agent，想把它稳定嵌进工作流里提效，也做过一些和 AI 相关的小项目。`,
+    quote: '千里之行，始于足下。',
+    quoteAttribution: '——老子《道德经》',
   },
   experience: {
     title: '实践旅程.',
@@ -217,6 +220,7 @@ const zhCatalog: SiteCatalog = {
   },
   contact: {
     h2: '联系我.',
+    quickLinksIntro: '发邮件之外，也可以直接通过这些方式找到我：',
     form: {
       name: { span: '怎么称呼你', placeholder: '留下你的名字' },
       email: { span: '邮箱', placeholder: '方便联系的邮箱' },
@@ -363,10 +367,9 @@ const zhCatalog: SiteCatalog = {
 
 const enCatalog: SiteCatalog = {
   hero: {
-    roles: ['Frontend builder', 'Web3 product collaborator'],
-    badge: 'Web2 + Web3 Builder · 7 Years',
-    caption: 'Building thoughtful AI and Web3 products with clean user experience.',
+    roles: ['Full-stack + Web3 + AI Explorer', ''],
     githubLabel: 'GitHub / Little-Curry-Spicy',
+    wechatLabel: `WeChat · ${config.links.wechatId}`,
   },
   about: {
     h2: 'About.',
@@ -375,6 +378,8 @@ const enCatalog: SiteCatalog = {
 After graduation I worked in electrical engineering for a while—the work was tiring, the safety risk was real, and the pay was only so-so, so I decided to change direction. I went to Zhengzhou and took a front-end bootcamp at Tarena—that’s also where I met my partner. When the course finished I joined a small company as the only front-end on the team: no AI assistants like today, not many “seniors” to ask, so I spent evenings and weekends reading docs and digging through problems on my own. I was lucky that colleagues and backend teammates were willing to grind through overtime with me, and my manager kept encouraging me not to stop learning.
 
 Later the salary ceiling in Zhengzhou felt clearer, so I moved to Hangzhou—income improved a lot compared to Zhengzhou, but housing is pricier too, so I still rent; the metro is convenient, the climate suits me, and I’m happy to stay here for the long run. Since 2022 I’ve been doing front-end for a government/enterprise–oriented company and have shipped quite a few projects. I also took a structured Web3 course at Yideng Tech, then joined my current company on the exchange side. Recently I’ve been exploring AI agents—how to wire them into the workflow for real efficiency—and I’ve built a few small AI-related side projects.`,
+    quote: 'The journey of a thousand miles begins with one step.',
+    quoteAttribution: '— Lao Tzu, Tao Te Ching',
   },
   experience: {
     title: 'Journey.',
@@ -391,6 +396,7 @@ Later the salary ceiling in Zhengzhou felt clearer, so I moved to Hangzhou—inc
   },
   contact: {
     h2: 'Contact.',
+    quickLinksIntro: 'Prefer something quicker? You can also reach me here:',
     form: {
       name: { span: 'Your name', placeholder: 'How should I call you?' },
       email: { span: 'Email', placeholder: 'Best email to reach you' },

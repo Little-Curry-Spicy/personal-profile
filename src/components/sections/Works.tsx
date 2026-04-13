@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 
+import { styles } from '@/constants/styles';
 import SectionWrapper from './SectionWrapper';
 import { fadeIn } from '@/shared/animations';
 import { TProject } from '../../types';
@@ -28,8 +29,8 @@ const ProjectCard: React.FC<
     const coverImage = images[0];
     return (
       <motion.div variants={fadeIn('up', 'spring', index * 0.25, 0.6)}>
-        <div className="group relative flex h-[640px] w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-warm-border bg-warm-elevated px-4 pt-4 pb-0 shadow-[0_0_0_1px_var(--color-subtle)] transition duration-300 hover:-translate-y-2 hover:border-warm-border hover:shadow-[rgba(0,0,0,0.08)_0px_12px_36px,0_0_0_1px_var(--color-border)] md:h-[656px]">
-          <div className="relative z-[11] h-[208px] w-full shrink-0 overflow-hidden rounded-xl leading-none md:h-[216px]">
+        <div className="group relative flex h-[640px] w-full min-w-0 flex-col overflow-hidden rounded-[1.75rem] border border-warm-border bg-warm-elevated px-4 pt-4 pb-0 shadow-[0_16px_44px_-28px_rgba(0,0,0,0.07)] transition duration-300 hover:-translate-y-2 hover:border-warm-border hover:shadow-[0_22px_48px_-24px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_22px_48px_-20px_rgba(0,0,0,0.5)] md:h-[656px]">
+          <div className="relative z-[11] h-[208px] w-full shrink-0 overflow-hidden rounded-2xl leading-none md:h-[216px]">
             <img
               src={coverImage}
               alt={name}
@@ -40,10 +41,7 @@ const ProjectCard: React.FC<
 
           {/* relative z-10：默认叠在 translate 走的详情层之上，避免未 hover 时底层仍盖住 tag 底部 */}
           <div className="relative z-10 mt-4 min-h-0 flex-1 overflow-y-auto overscroll-y-contain pb-4">
-            <h3
-              className="line-clamp-2 text-[34px] leading-[1.2] text-warm-fg sm:text-[28px]"
-              style={{ fontFamily: 'Georgia, serif', fontWeight: 500 }}
-            >
+            <h3 className="boutique-display line-clamp-2 text-[34px] font-medium leading-[1.2] text-warm-fg sm:text-[28px]">
               {name}
             </h3>
             <p className="mt-2 text-[15px] leading-7 text-warm-muted">{description}</p>
@@ -64,10 +62,7 @@ const ProjectCard: React.FC<
             <div className="mb-3 flex justify-center">
               <span className="h-1.5 w-14 rounded-full bg-warm-border" />
             </div>
-            <h4
-              className="text-[28px] leading-[1.2] text-warm-fg"
-              style={{ fontFamily: 'Georgia, serif', fontWeight: 500 }}
-            >
+            <h4 className="boutique-display text-[28px] font-medium leading-[1.2] text-warm-fg">
               {name}
             </h4>
             <p className="mt-3 flex-1 overflow-y-auto pr-1 text-[15px] leading-7 text-warm-soft">
@@ -178,10 +173,7 @@ const Works = () => {
   return (
     <>
       <div className="mb-10">
-        <h2
-          className="text-[52px] leading-[1.2] text-warm-fg max-sm:text-[38px]"
-          style={{ fontFamily: 'Georgia, serif', fontWeight: 500 }}
-        >
+        <h2 className={`${styles.sectionHeadText} font-medium leading-[1.2] max-sm:text-[38px]`}>
           {catalog.works.title}
         </h2>
       </div>

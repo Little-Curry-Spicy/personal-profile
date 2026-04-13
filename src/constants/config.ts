@@ -13,7 +13,8 @@ type TConfig = {
   links: {
     twitterUrl: string;
     twitterLabel: string;
-    wechatLabel: string;
+    /** 微信号（仅 ID，展示文案由 i18n catalog.hero.wechatLabel 按语言拼接） */
+    wechatId: string;
   };
   /** 首页右下角助手浮标内嵌的个人信息查询页 */
   personalInfoEmbedUrl: string;
@@ -41,14 +42,14 @@ type TConfig = {
 
 export const config: TConfig = {
   html: {
-    title: 'Tang Shuokun · Frontend & Web3',
+    title: 'Tang Shuokun',
     fullName: 'Tang Shuokun',
     email: 'tskwangyi@163.com',
   },
   links: {
     twitterUrl: 'https://x.com/ShuokunT',
     twitterLabel: 'X / @ShuokunT',
-    wechatLabel: '微信 · cc2939117014',
+    wechatId: 'cc2939117014',
   },
   personalInfoEmbedUrl: 'https://1996tsk.top/info/',
   hero: {

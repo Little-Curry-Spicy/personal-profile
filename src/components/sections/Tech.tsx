@@ -1,3 +1,4 @@
+import { styles } from '@/constants/styles';
 import SectionWrapper from './SectionWrapper';
 import { useI18n } from '@/context/I18nContext';
 
@@ -7,10 +8,7 @@ const Tech = () => {
   return (
     <>
       <div className="mb-12">
-        <h2
-          className="text-[52px] leading-[1.2] text-warm-fg max-sm:text-[38px]"
-          style={{ fontFamily: 'Georgia, serif', fontWeight: 500 }}
-        >
+        <h2 className={`${styles.sectionHeadText} font-medium leading-[1.2] max-sm:text-[38px]`}>
           {catalog.tech.title}
         </h2>
       </div>
@@ -19,10 +17,10 @@ const Tech = () => {
         {catalog.tech.groups.map(group => (
           <div
             key={group.title}
-            className="rounded-2xl border border-warm-border bg-warm-elevated p-6 shadow-[0_0_0_1px_var(--color-subtle)]"
+            className="rounded-[1.75rem] border border-warm-border bg-warm-elevated p-6 shadow-[0_16px_40px_-28px_rgba(0,0,0,0.06)] dark:shadow-[0_18px_44px_-26px_rgba(0,0,0,0.45)]"
           >
             <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-warm-border bg-warm-page text-lg">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-warm-border bg-warm-page text-lg">
                 <span>{group.icon}</span>
               </div>
               <h3 className="text-xl text-warm-fg">{group.title}</h3>

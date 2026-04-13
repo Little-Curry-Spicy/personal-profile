@@ -3,6 +3,7 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 
 import 'react-vertical-timeline-component/style.min.css';
 
+import { styles } from '@/constants/styles';
 import SectionWrapper from './SectionWrapper';
 import { TExperience } from '../../types';
 import { useI18n } from '@/context/I18nContext';
@@ -60,8 +61,7 @@ const Experience = () => {
     <>
       <div className="mb-10">
         <h2
-          className="text-[52px] leading-[1.2] text-warm-fg max-sm:text-[38px]"
-          style={{ fontFamily: 'Georgia, serif', fontWeight: 500 }}
+          className={`${styles.sectionHeadText} font-medium leading-[1.2] max-sm:text-[38px]`}
         >
           {catalog.experience.title}
         </h2>

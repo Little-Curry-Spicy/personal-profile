@@ -13,10 +13,7 @@ interface IHeader {
 export const Header: React.FC<IHeader> = ({ useMotion, h2 }) => {
   const content = (
     <>
-      <h2
-        className={`${styles.sectionHeadText} text-warm-fg`}
-        style={{ fontFamily: 'Georgia, serif', fontWeight: 500 }}
-      >
+      <h2 className={`${styles.sectionHeadText} font-medium text-warm-fg`}>
         {h2}
       </h2>
     </>

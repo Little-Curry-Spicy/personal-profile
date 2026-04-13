@@ -23,25 +23,25 @@ const HomePage = () => {
   }, [location.hash, location.pathname]);
 
   return (
-    <div className="relative z-0 bg-warm-page text-warm-fg">
-      <div className="border-b border-warm-border">
+    <div className="home-page-root relative z-0 min-h-screen text-warm-fg">
+      <div className="border-b border-warm-border bg-transparent dark:border-warm-border/50">
         <Navbar />
         <Hero />
       </div>
 
-      <div className="border-b border-warm-subtle bg-warm-elevated">
+      <div className="home-section-strip border-b border-warm-border/80 dark:border-warm-border/40">
         <About />
       </div>
-      <div className="border-b border-warm-border bg-warm-page">
+      <div className="home-section-strip border-b border-warm-border/80 dark:border-warm-border/40">
         <Experience />
       </div>
-      <div className="border-b border-warm-subtle bg-warm-elevated">
+      <div className="home-section-strip border-b border-warm-border/80 dark:border-warm-border/40">
         <Tech />
       </div>
-      <div className="border-b border-warm-border bg-warm-page">
+      <div className="home-section-strip border-b border-warm-border/80 dark:border-warm-border/40">
         <Works />
       </div>
-      <div className="relative z-0 border-t border-warm-border bg-warm-page">
+      <div className="home-section-strip relative z-0 border-t border-warm-border/80 dark:border-warm-border/40">
         <Contact />
       </div>
 
@@ -50,7 +50,7 @@ const HomePage = () => {
         aria-label={t('a11y.openAssistant')}
         aria-haspopup="dialog"
         onClick={() => setPersonalInfoOpen(true)}
-        className="fixed bottom-6 right-6 z-50 h-36 w-36 overflow-hidden rounded-[2rem] border border-warm-border bg-warm-chip shadow-[0_0_0_1px_var(--color-chip-ring)] transition hover:scale-[1.02]"
+        className="fixed bottom-6 right-6 z-50 h-36 w-36 overflow-hidden rounded-[2rem] border border-warm-border bg-warm-chip shadow-[0_0_0_1px_var(--color-chip-ring),0_18px_40px_-16px_color-mix(in_oklab,var(--color-clay-tint)_28%,transparent)] transition hover:scale-[1.02]"
       >
         <AiLottie />
       </button>

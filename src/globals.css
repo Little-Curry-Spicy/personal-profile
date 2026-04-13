@@ -16,6 +16,9 @@
   --color-warm-wash: var(--color-wash);
   --color-warm-tag: var(--color-tag-bg);
   --color-warm-tag-border: var(--color-tag-border);
+  --color-warm-studio: var(--color-studio);
+  --color-warm-studio-fg: var(--color-studio-fg);
+  --color-warm-clay: var(--color-clay-tint);
 
   --color-primary: #050816;
   --color-secondary: #aaa6c3;
@@ -28,46 +31,420 @@
 }
 
 :root {
-  --color-page: #f5f4ed;
-  --color-elevated: #faf9f5;
-  --color-subtle: #f0eee6;
-  --color-border: #e8e6dc;
-  --color-muted: #5e5d59;
-  --color-fg: #141413;
-  --color-soft: #4d4c48;
-  --color-accent: #c96442;
-  --color-chip: #141413;
-  --color-chip-ring: #30302e;
-  --color-wash: #87867f;
-  --color-tag-bg: #f5f4ed;
-  --color-tag-border: #e8e6dc;
-  --color-timeline: #e8e6dc;
-  --color-icon-halo: #fffdf8;
-  --color-icon-inset: #d8b7a7;
+  --color-page: #faf6ef;
+  --color-elevated: #fffefb;
+  --color-subtle: #f2ebe0;
+  --color-border: #e6dfd3;
+  --color-muted: #5c574e;
+  --color-fg: #1a1814;
+  --color-soft: #4a4640;
+  --color-accent: #b8573a;
+  --color-studio: #5f92c9;
+  --color-studio-fg: #fafdff;
+  --color-clay-tint: #d9a090;
+  --color-chip: #2a2824;
+  --color-chip-ring: #3d3a35;
+  --color-wash: #7f7a72;
+  --color-tag-bg: #f7f1e8;
+  --color-tag-border: #e6dfd3;
+  --color-timeline: #e6dfd3;
+  --color-icon-halo: #fffaf4;
+  --color-icon-inset: #c9a995;
 }
 
 .dark {
-  --color-page: #141413;
-  --color-elevated: #1c1b18;
-  --color-subtle: #2a2824;
-  --color-border: #3a3835;
-  --color-muted: #b0aea5;
-  --color-fg: #faf9f5;
-  --color-soft: #d4d0c5;
-  --color-accent: #d97757;
-  --color-chip: #2d2c28;
-  --color-chip-ring: #5c5a54;
-  --color-wash: #9c9a92;
-  --color-tag-bg: #252420;
-  --color-tag-border: #3a3835;
-  --color-timeline: #3a3835;
-  --color-icon-halo: #1c1b18;
-  --color-icon-inset: #8b6a5a;
+  --color-page: #161411;
+  --color-elevated: #1f1c17;
+  --color-subtle: #2c2822;
+  --color-border: #3d3830;
+  --color-muted: #bcb6ab;
+  --color-fg: #faf7f0;
+  --color-soft: #d8d2c8;
+  --color-accent: #e08a65;
+  --color-studio: #6fa3db;
+  --color-studio-fg: #fafdff;
+  --color-clay-tint: #c49a8a;
+  --color-chip: #2a2620;
+  --color-chip-ring: #524a42;
+  --color-wash: #9a948a;
+  --color-tag-bg: #242018;
+  --color-tag-border: #3d3830;
+  --color-timeline: #3d3830;
+  --color-icon-halo: #1f1c17;
+  --color-icon-inset: #8f7264;
 }
 
 body {
-  background: var(--color-page);
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  font-optical-sizing: auto;
+  background-color: var(--color-page);
+  background-image: radial-gradient(
+    1000px 520px at 88% -10%,
+    color-mix(in oklab, var(--color-studio) 12%, transparent),
+    transparent 58%
+  );
   color: var(--color-fg);
+}
+
+/**
+ * 首页根容器：全幅背景图（public/v2osk-1Z2niiBPg5A-unsplash.jpg）
+ * 宽幅山谷晨昏 + 雾与侧光；浅色叠奶油渐变、深色叠暗角，保证正文可读。
+ */
+.home-page-root {
+  background-color: var(--color-page);
+  background-image: linear-gradient(
+      165deg,
+      color-mix(in oklab, var(--color-page) 82%, transparent) 0%,
+      color-mix(in oklab, var(--color-page) 45%, transparent) 46%,
+      transparent 70%
+    ),
+    radial-gradient(
+      900px 520px at 50% -5%,
+      color-mix(in oklab, var(--color-studio) 10%, transparent),
+      transparent 50%
+    ),
+    url("/v2osk-1Z2niiBPg5A-unsplash.jpg");
+  background-size: auto, auto, cover;
+  background-position: center, center, 50% 42%;
+  background-attachment: scroll, scroll, fixed;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+.dark .home-page-root {
+  background-image: radial-gradient(
+      1000px 520px at 50% 0%,
+      color-mix(in oklab, var(--color-studio) 14%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 48%, rgba(0, 0, 0, 0.5) 100%),
+    url("/v2osk-1Z2niiBPg5A-unsplash.jpg");
+  background-size: auto, auto, cover;
+  background-position: center, center, 50% 42%;
+  background-attachment: scroll, scroll, fixed;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+@keyframes home-strip-star-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(8%, -5.5%, 0);
+  }
+}
+
+@keyframes home-strip-star-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0.62;
+  }
+  55% {
+    opacity: 0.88;
+  }
+}
+
+/**
+ * 首页 Hero 以下各区块：月光 + 底色；::before 星空（漂移 + 闪烁）
+ */
+.home-section-strip {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-page);
+  background-image: radial-gradient(
+      920px 520px at 96% -6%,
+      color-mix(in oklab, #e8eef8 18%, transparent) 0%,
+      color-mix(in oklab, var(--color-studio) 10%, transparent) 38%,
+      transparent 58%
+    ),
+    radial-gradient(1100px 640px at 108% 12%, rgba(200, 212, 235, 0.1) 0%, transparent 55%),
+    linear-gradient(
+      175deg,
+      color-mix(in oklab, var(--color-elevated) 97%, transparent) 0%,
+      var(--color-page) 52%,
+      color-mix(in oklab, var(--color-subtle) 90%, transparent) 100%
+    );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.home-section-strip > * {
+  position: relative;
+  z-index: 1;
+}
+
+html:not(.dark) .home-section-strip::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -6%;
+  pointer-events: none;
+  background-image: radial-gradient(
+      circle at 14% 24%,
+      rgba(55, 78, 118, 0.55) 0,
+      rgba(55, 78, 118, 0.55) 1.25px,
+      rgba(55, 78, 118, 0.12) 2.2px,
+      transparent 3.4px
+    ),
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(55, 78, 118, 0.35) 0,
+      rgba(55, 78, 118, 0.35) 0.9px,
+      rgba(55, 78, 118, 0.08) 1.8px,
+      transparent 2.8px
+    ),
+    radial-gradient(
+      circle at 40% 78%,
+      rgba(55, 78, 118, 0.42) 0,
+      rgba(55, 78, 118, 0.42) 1px,
+      rgba(55, 78, 118, 0.1) 2px,
+      transparent 3.2px
+    ),
+    radial-gradient(
+      circle at 88% 56%,
+      rgba(55, 78, 118, 0.3) 0,
+      rgba(55, 78, 118, 0.3) 0.85px,
+      rgba(55, 78, 118, 0.07) 1.6px,
+      transparent 2.6px
+    ),
+    radial-gradient(
+      circle at 6% 46%,
+      rgba(55, 78, 118, 0.32) 0,
+      rgba(55, 78, 118, 0.32) 0.8px,
+      rgba(55, 78, 118, 0.08) 1.7px,
+      transparent 2.6px
+    ),
+    radial-gradient(
+      circle at 26% 12%,
+      rgba(55, 78, 118, 0.4) 0,
+      rgba(55, 78, 118, 0.4) 1px,
+      rgba(55, 78, 118, 0.09) 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 52% 34%,
+      rgba(55, 78, 118, 0.28) 0,
+      rgba(55, 78, 118, 0.28) 0.75px,
+      rgba(55, 78, 118, 0.06) 1.5px,
+      transparent 2.4px
+    ),
+    radial-gradient(
+      circle at 62% 8%,
+      rgba(55, 78, 118, 0.38) 0,
+      rgba(55, 78, 118, 0.38) 0.95px,
+      rgba(55, 78, 118, 0.08) 1.9px,
+      transparent 2.9px
+    ),
+    radial-gradient(
+      circle at 78% 40%,
+      rgba(55, 78, 118, 0.33) 0,
+      rgba(55, 78, 118, 0.33) 0.85px,
+      rgba(55, 78, 118, 0.07) 1.7px,
+      transparent 2.7px
+    ),
+    radial-gradient(
+      circle at 18% 62%,
+      rgba(55, 78, 118, 0.36) 0,
+      rgba(55, 78, 118, 0.36) 0.9px,
+      rgba(55, 78, 118, 0.08) 1.8px,
+      transparent 2.8px
+    ),
+    radial-gradient(
+      circle at 48% 52%,
+      rgba(55, 78, 118, 0.26) 0,
+      rgba(55, 78, 118, 0.26) 0.7px,
+      rgba(55, 78, 118, 0.06) 1.4px,
+      transparent 2.3px
+    ),
+    radial-gradient(
+      circle at 32% 88%,
+      rgba(55, 78, 118, 0.3) 0,
+      rgba(55, 78, 118, 0.3) 0.8px,
+      rgba(55, 78, 118, 0.07) 1.6px,
+      transparent 2.5px
+    ),
+    radial-gradient(
+      circle at 94% 32%,
+      rgba(55, 78, 118, 0.34) 0,
+      rgba(55, 78, 118, 0.34) 0.88px,
+      rgba(55, 78, 118, 0.07) 1.7px,
+      transparent 2.6px
+    ),
+    radial-gradient(
+      circle at 58% 68%,
+      rgba(55, 78, 118, 0.24) 0,
+      rgba(55, 78, 118, 0.24) 0.65px,
+      rgba(55, 78, 118, 0.05) 1.35px,
+      transparent 2.2px
+    ),
+    radial-gradient(
+      circle at 82% 12%,
+      rgba(55, 78, 118, 0.29) 0,
+      rgba(55, 78, 118, 0.29) 0.72px,
+      rgba(55, 78, 118, 0.06) 1.45px,
+      transparent 2.3px
+    );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: home-strip-star-drift 22s ease-in-out infinite alternate,
+    home-strip-star-twinkle 2.1s ease-in-out infinite;
+}
+
+.dark .home-section-strip {
+  background-color: #0b0c10;
+  background-image: radial-gradient(
+      880px 500px at 94% -4%,
+      rgba(220, 228, 248, 0.11) 0%,
+      color-mix(in oklab, var(--color-studio) 9%, transparent) 42%,
+      transparent 56%
+    ),
+    radial-gradient(1000px 580px at 102% 8%, rgba(180, 190, 220, 0.06) 0%, transparent 52%),
+    linear-gradient(180deg, #12141c 0%, #0e1016 44%, #0a0b0f 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.dark .home-section-strip::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -6%;
+  pointer-events: none;
+  background-image: radial-gradient(
+      circle at 12% 26%,
+      rgba(255, 255, 255, 0.92) 0,
+      rgba(255, 255, 255, 0.92) 1px,
+      rgba(255, 255, 255, 0.2) 2.2px,
+      transparent 3.6px
+    ),
+    radial-gradient(
+      circle at 72% 22%,
+      rgba(255, 255, 255, 0.45) 0,
+      rgba(255, 255, 255, 0.45) 0.75px,
+      rgba(255, 255, 255, 0.12) 1.6px,
+      transparent 2.8px
+    ),
+    radial-gradient(
+      circle at 36% 76%,
+      rgba(255, 255, 255, 0.7) 0,
+      rgba(255, 255, 255, 0.7) 1px,
+      rgba(255, 255, 255, 0.15) 2px,
+      transparent 3.2px
+    ),
+    radial-gradient(
+      circle at 90% 54%,
+      rgba(255, 255, 255, 0.38) 0,
+      rgba(255, 255, 255, 0.38) 0.7px,
+      rgba(255, 255, 255, 0.1) 1.5px,
+      transparent 2.5px
+    ),
+    radial-gradient(
+      circle at 8% 44%,
+      rgba(255, 255, 255, 0.52) 0,
+      rgba(255, 255, 255, 0.52) 0.8px,
+      rgba(255, 255, 255, 0.12) 1.7px,
+      transparent 2.7px
+    ),
+    radial-gradient(
+      circle at 24% 10%,
+      rgba(255, 255, 255, 0.62) 0,
+      rgba(255, 255, 255, 0.62) 0.95px,
+      rgba(255, 255, 255, 0.14) 1.9px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255, 255, 255, 0.4) 0,
+      rgba(255, 255, 255, 0.4) 0.72px,
+      rgba(255, 255, 255, 0.1) 1.5px,
+      transparent 2.4px
+    ),
+    radial-gradient(
+      circle at 64% 6%,
+      rgba(255, 255, 255, 0.55) 0,
+      rgba(255, 255, 255, 0.55) 0.88px,
+      rgba(255, 255, 255, 0.12) 1.75px,
+      transparent 2.7px
+    ),
+    radial-gradient(
+      circle at 80% 38%,
+      rgba(255, 255, 255, 0.48) 0,
+      rgba(255, 255, 255, 0.48) 0.82px,
+      rgba(255, 255, 255, 0.11) 1.65px,
+      transparent 2.6px
+    ),
+    radial-gradient(
+      circle at 20% 58%,
+      rgba(255, 255, 255, 0.5) 0,
+      rgba(255, 255, 255, 0.5) 0.78px,
+      rgba(255, 255, 255, 0.11) 1.55px,
+      transparent 2.5px
+    ),
+    radial-gradient(
+      circle at 46% 48%,
+      rgba(255, 255, 255, 0.35) 0,
+      rgba(255, 255, 255, 0.35) 0.65px,
+      rgba(255, 255, 255, 0.09) 1.35px,
+      transparent 2.2px
+    ),
+    radial-gradient(
+      circle at 30% 86%,
+      rgba(255, 255, 255, 0.42) 0,
+      rgba(255, 255, 255, 0.42) 0.75px,
+      rgba(255, 255, 255, 0.1) 1.55px,
+      transparent 2.5px
+    ),
+    radial-gradient(
+      circle at 96% 28%,
+      rgba(255, 255, 255, 0.46) 0,
+      rgba(255, 255, 255, 0.46) 0.82px,
+      rgba(255, 255, 255, 0.11) 1.65px,
+      transparent 2.6px
+    ),
+    radial-gradient(
+      circle at 56% 64%,
+      rgba(255, 255, 255, 0.32) 0,
+      rgba(255, 255, 255, 0.32) 0.62px,
+      rgba(255, 255, 255, 0.08) 1.3px,
+      transparent 2.1px
+    ),
+    radial-gradient(
+      circle at 84% 10%,
+      rgba(255, 255, 255, 0.38) 0,
+      rgba(255, 255, 255, 0.38) 0.7px,
+      rgba(255, 255, 255, 0.09) 1.4px,
+      transparent 2.3px
+    );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: home-strip-star-drift 26s ease-in-out infinite alternate,
+    home-strip-star-twinkle 2.35s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-section-strip::before {
+    animation: none !important;
+  }
+}
+
+/* 首屏叠在背景图上时的标题可读性 */
+html.dark .hero-dreamscape .boutique-display,
+html.dark .hero-dreamscape .hero-dreamscape-sub,
+html.dark .hero-dreamscape .hero-dreamscape-caption {
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+html:not(.dark) .hero-dreamscape .boutique-display,
+html:not(.dark) .hero-dreamscape .hero-dreamscape-sub,
+html:not(.dark) .hero-dreamscape .hero-dreamscape-caption {
+  text-shadow: 0 1px 2px color-mix(in oklab, var(--color-page) 70%, transparent);
+}
+
+.boutique-display {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
 }
 
 .hash-span {

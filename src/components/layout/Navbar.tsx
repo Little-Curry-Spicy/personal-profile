@@ -92,10 +92,9 @@ const Navbar = () => {
     };
   }, [isHome]);
 
-  const navBarBg =
-    scrolled
-      ? 'border-warm-border bg-warm-page/95 backdrop-blur'
-      : 'border-warm-subtle bg-warm-page/92 backdrop-blur';
+  const shellShadow = scrolled
+    ? 'shadow-[0_14px_40px_-12px_rgba(0,0,0,0.14)] dark:shadow-[0_18px_44px_-14px_rgba(0,0,0,0.65)]'
+    : 'shadow-[0_10px_34px_-14px_rgba(0,0,0,0.1)] dark:shadow-[0_14px_38px_-16px_rgba(0,0,0,0.55)]';
 
   const linkIsActive = (nav: TNavLink) => {
     if (nav.id === 'home') {
@@ -108,8 +107,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${styles.paddingX} fixed top-0 z-20 flex w-full items-center py-5 ${navBarBg} border-b`}>
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3">
+    <header className="pointer-events-none fixed top-0 z-20 w-full pt-4 sm:pt-5">
+      <nav
+        className={`${styles.paddingX} pointer-events-auto mx-auto flex w-full max-w-5xl items-center justify-between gap-3 rounded-full border border-warm-border bg-warm-elevated/90 py-3 backdrop-blur-md sm:px-6 ${shellShadow}`}
+      >
         <Link
           to="/"
           className="flex min-w-0 items-center gap-2"
@@ -154,7 +155,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-2 border-l border-warm-border pl-6">
             <div
-              className="inline-flex h-9 items-stretch overflow-hidden rounded-xl border border-warm-border bg-warm-elevated text-sm shadow-[0_0_0_1px_var(--color-subtle)]"
+              className="inline-flex h-9 items-stretch overflow-hidden rounded-full border border-warm-border bg-warm-page/70 text-sm"
               role="group"
               aria-label={t('lang.toggleGroup')}
             >
@@ -189,7 +190,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-warm-border bg-warm-elevated text-warm-soft shadow-[0_0_0_1px_var(--color-subtle)] transition hover:border-warm-border hover:text-warm-fg"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-warm-border bg-warm-page/70 text-warm-soft transition hover:border-warm-muted/35 hover:text-warm-fg"
               title={theme === 'light' ? t('theme.useDark') : t('theme.useLight')}
               aria-label={theme === 'light' ? t('theme.useDark') : t('theme.useLight')}
             >
@@ -204,7 +205,7 @@ const Navbar = () => {
 
         <div className="flex flex-1 items-center justify-end gap-2 sm:hidden">
           <div
-            className="inline-flex h-10 items-stretch overflow-hidden rounded-xl border border-warm-border bg-warm-elevated text-sm shadow-[0_0_0_1px_var(--color-subtle)] active:opacity-90"
+            className="inline-flex h-10 items-stretch overflow-hidden rounded-full border border-warm-border bg-warm-page/70 text-sm active:opacity-90"
             role="group"
             aria-label={t('lang.toggleGroup')}
           >
@@ -239,7 +240,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-warm-border bg-warm-elevated text-warm-soft shadow-[0_0_0_1px_var(--color-subtle)] active:opacity-90"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-warm-border bg-warm-page/70 text-warm-soft active:opacity-90"
             title={theme === 'light' ? t('theme.useDark') : t('theme.useLight')}
             aria-label={theme === 'light' ? t('theme.useDark') : t('theme.useLight')}
           >
@@ -259,7 +260,7 @@ const Navbar = () => {
           <div
             className={`${
               !toggle ? 'hidden' : 'flex'
-            } absolute right-0 top-20 z-10 mx-4 my-2 min-w-[160px] rounded-xl border border-warm-border bg-warm-elevated p-6 shadow-[0_0_0_1px_var(--color-subtle)]`}
+            } absolute right-0 top-[4.5rem] z-10 mx-2 my-2 min-w-[180px] rounded-2xl border border-warm-border bg-warm-elevated p-6 shadow-lg`}
           >
             <ul className="flex flex-1 list-none flex-col items-start justify-end gap-4">
               {navLinks.map(nav => {
@@ -294,8 +295,8 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 

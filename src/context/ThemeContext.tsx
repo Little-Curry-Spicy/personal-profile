@@ -26,10 +26,15 @@ const LIGHT_BG = '#f5f4ed';
 const DARK_BG = '#141413';
 
 export function getStoredTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
-  const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-  if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  if (typeof window === 'undefined') return 'dark';
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
+    if (stored === 'light' || stored === 'dark') return stored;
+    /** 无记录时默认深色，与线上视觉稿一致；用户可手动切到浅色并写入 localStorage */
+    return 'dark';
+  } catch {
+    return 'dark';
+  }
 }
 
 /** Call before React render to avoid theme flash */
