@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- 与 src/context/ThemeContext.tsx#getStoredTheme 同步：首帧前挂上 dark，避免打包后浅色系统首访或 JS 前闪浅色 -->
   <script>
     (function () {
       try {
@@ -16,12 +15,11 @@
       }
     })();
   </script>
+  %CF_WEB_ANALYTICS_SCRIPT%
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,450&display=swap"
-  />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,450&display=swap" />
   <link rel="icon" type="image/png" href="/og.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>%HTML_TITLE%</title>

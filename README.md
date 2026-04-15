@@ -127,8 +127,8 @@ reactjs18-3d-portfolio/
 # 站点绝对地址（无尾部斜杠），用于 OG 等
 VITE_SITE_URL=https://1996tsk.top
 
-# GoatCounter 统计端点（可选）；格式示例：https://your-code.goatcounter.com/count
-VITE_GOATCOUNTER_ENDPOINT=https://your-code.goatcounter.com/count
+# Cloudflare Web Analytics token（可选）
+VITE_CF_WEB_ANALYTICS_TOKEN=<your-cloudflare-analytics-token>
 
 # 联系表单：https://web3forms.com/ 申请后填入；未配置时表单会提示需配置
 VITE_WEB3FORMS_ACCESS_KEY=<your-web3forms-access-key>

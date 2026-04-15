@@ -3,8 +3,8 @@
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL?: string;
   readonly VITE_SUPABASE_ANON_KEY?: string;
-  /** GoatCounter 统计端点，如 https://xxxx.goatcounter.com/count */
-  readonly VITE_GOATCOUNTER_ENDPOINT?: string;
+  /** Cloudflare Web Analytics token（dashboard 中复制） */
+  readonly VITE_CF_WEB_ANALYTICS_TOKEN?: string;
   /** 站点根 URL，用于 OG / canonical（build 时写入 index.html） */
   readonly VITE_SITE_URL?: string;
   readonly VITE_HTML_TITLE?: string;

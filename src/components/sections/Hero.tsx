@@ -1,77 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
 import { styles } from '../../constants/styles';
 import { config } from '../../constants/config';
 import { useI18n } from '@/context/I18nContext';
 
-const GOATCOUNTER_ENDPOINT = import.meta.env.VITE_GOATCOUNTER_ENDPOINT?.trim() ?? '';
-
-function getGoatcounterBase(endpoint: string): string {
-  return endpoint.replace(/\/count\/?$/, '');
-}
-
-function getCounterPathname(pathname: string): string {
-  if (pathname === '/') return '//';
-  return pathname.startsWith('/') ? pathname : `/${pathname}`;
-}
-
 const Hero = () => {
   const { locale, catalog } = useI18n();
   const hiLabel = locale === 'zh' ? 'Hi，我是' : "Hi, I'm";
-  const [visitorCount, setVisitorCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const syncVisitorCount = async () => {
-      try {
-        if (!GOATCOUNTER_ENDPOINT) return;
-
-        const base = getGoatcounterBase(GOATCOUNTER_ENDPOINT);
-        const pagePath = getCounterPathname(window.location.pathname);
-        const controller = new AbortController();
-        const timeout = window.setTimeout(() => controller.abort(), 3000);
-
-        const response = await fetch(`${base}/counter${pagePath}.json`, {
-          signal: controller.signal,
-        });
-        window.clearTimeout(timeout);
-
-        if (!response.ok) {
-          throw new Error(`GoatCounter request failed: ${response.status}`);
-        }
-
-        const payload = (await response.json()) as { count?: unknown };
-        if (typeof payload.count === 'number' && !cancelled) {
-          setVisitorCount(payload.count);
-        }
-      } catch (error) {
-        console.error('Failed to load goatcounter visitor count', error);
-      }
-    };
-
-    void syncVisitorCount();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!GOATCOUNTER_ENDPOINT || import.meta.env.DEV) return;
-    const id = 'goatcounter-script';
-    if (document.getElementById(id)) return;
-
-    const script = document.createElement('script');
-    script.id = id;
-    script.async = true;
-    script.dataset.goatcounter = GOATCOUNTER_ENDPOINT;
-    script.src = `${getGoatcounterBase(GOATCOUNTER_ENDPOINT)}/count.js`;
-    document.head.appendChild(script);
-  }, []);
-
-  const visitorText = useMemo(() => {
-    if (visitorCount === null) return '--';
-    return `${new Intl.NumberFormat(locale === 'zh' ? 'zh-CN' : 'en-US').format(visitorCount)}+`;
-  }, [locale, visitorCount]);
 
   return (
     <section className="hero-dreamscape relative mx-auto min-h-screen w-full overflow-hidden bg-transparent">
@@ -110,27 +43,6 @@ const Hero = () => {
             </>
           ) : null}
         </p>
-
-        <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-warm-border bg-warm-chip/85 px-4 py-2 text-base text-warm-soft shadow-[0_0_0_1px_var(--color-chip-ring)] backdrop-blur-sm">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4 shrink-0"
-            aria-hidden
-          >
-            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="8.5" cy="7" r="4" />
-            <path d="M20 8v6" />
-            <path d="M23 11h-6" />
-          </svg>
-          <span className="tabular-nums">{visitorText}</span>
-          <span>{catalog.hero.visitorLabel}</span>
-        </div>
       </div>
     </section>
   );
