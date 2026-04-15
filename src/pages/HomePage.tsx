@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Navbar from '@/components/layout/Navbar';
-import { About, Contact, Experience, Hero, Tech, Works } from '@/components/sections';
+import { About, Contact, Experience, GithubCalendar, Hero, Tech, Works } from '@/components/sections';
 import AiLottie from '@/components/atoms/AiLottie';
 import PersonalInfoModal from '@/components/atoms/PersonalInfoModal';
 import { useI18n } from '@/context/I18nContext';
@@ -40,6 +40,9 @@ const HomePage = () => {
       </div>
       <div className="home-section-strip border-b border-warm-border/80 dark:border-warm-border/40">
         <Works />
+      </div>
+      <div className="home-section-strip border-b border-warm-border/80 dark:border-warm-border/40">
+        <GithubCalendar />
       </div>
       <div className="home-section-strip relative z-0 border-t border-warm-border/80 dark:border-warm-border/40">
         <Contact />

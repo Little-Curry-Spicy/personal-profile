@@ -26,86 +26,136 @@ const ProjectCard: React.FC<
   sourceLabel,
   previewLabel,
 }) => {
-    const coverImage = images[0];
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isFooterHovered, setIsFooterHovered] = useState(false);
+    const coverImage = images[currentImageIndex] ?? images[0];
+    const hasMultipleImages = images.length > 1;
+
+    const goToPrevImage = () => {
+      if (!hasMultipleImages) return;
+      setCurrentImageIndex(prev => (prev - 1 + images.length) % images.length);
+    };
+
+    const goToNextImage = () => {
+      if (!hasMultipleImages) return;
+      setCurrentImageIndex(prev => (prev + 1) % images.length);
+    };
+
     return (
       <motion.div variants={fadeIn('up', 'spring', index * 0.25, 0.6)}>
-        <div className="group relative flex h-[640px] w-full min-w-0 flex-col overflow-hidden rounded-[1.75rem] border border-warm-border bg-warm-elevated px-4 pt-4 pb-0 shadow-[0_16px_44px_-28px_rgba(0,0,0,0.07)] transition duration-300 hover:-translate-y-2 hover:border-warm-border hover:shadow-[0_22px_48px_-24px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_22px_48px_-20px_rgba(0,0,0,0.5)] md:h-[656px]">
+        <div
+          className={`relative flex h-[640px] w-full min-w-0 flex-col overflow-hidden rounded-[1.75rem] border border-warm-border bg-warm-elevated px-4 pt-4 pb-0 shadow-[0_16px_44px_-28px_rgba(0,0,0,0.07)] transition duration-300 hover:border-warm-border hover:shadow-[0_22px_48px_-24px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_22px_48px_-20px_rgba(0,0,0,0.5)] md:h-[656px] ${
+            isFooterHovered ? '-translate-y-2' : ''
+          }`}
+          onMouseLeave={() => setIsFooterHovered(false)}
+        >
           <div className="relative z-[11] h-[208px] w-full shrink-0 overflow-hidden rounded-2xl leading-none md:h-[216px]">
             <img
               src={coverImage}
               alt={name}
-              className="block h-full w-full cursor-zoom-in object-cover transition duration-300 group-hover:scale-[1.04]"
-              onClick={() => onPreview(name, images)}
+              className="block h-full w-full cursor-zoom-in object-cover transition duration-300"
+              onClick={() => onPreview(name, images, currentImageIndex)}
             />
-          </div>
 
-          {/* relative z-10：默认叠在 translate 走的详情层之上，避免未 hover 时底层仍盖住 tag 底部 */}
-          <div className="relative z-10 mt-4 min-h-0 flex-1 overflow-y-auto overscroll-y-contain pb-4">
-            <h3 className="boutique-display line-clamp-2 text-[34px] font-medium leading-[1.2] text-warm-fg sm:text-[28px]">
-              {name}
-            </h3>
-            <p className="mt-2 text-[15px] leading-7 text-warm-muted">{description}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {tags.map(tag => (
-                <span
-                  key={tag.name}
-                  className="rounded-full border border-warm-tag-border bg-warm-tag px-3 py-1 text-xs text-warm-soft"
+            {hasMultipleImages ? (
+              <>
+                <button
+                  type="button"
+                  onClick={event => {
+                    event.stopPropagation();
+                    goToPrevImage();
+                  }}
+                  className="absolute left-3 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-warm-border/70 bg-warm-elevated/85 text-lg text-warm-soft backdrop-blur-sm transition hover:text-warm-fg"
+                  aria-label={`Previous image of ${name}`}
                 >
-                  {tag.name}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[-50px] z-0 flex translate-y-full flex-col rounded-2xl bg-warm-elevated px-5 pt-5 pb-0 opacity-100 shadow-[0_-14px_30px_rgba(0,0,0,0.08)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pointer-events-auto group-hover:bottom-[56px] group-hover:z-20 group-hover:translate-y-0">
-            <div className="absolute left-0 right-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-warm-subtle to-transparent" />
-            <div className="mb-3 flex justify-center">
-              <span className="h-1.5 w-14 rounded-full bg-warm-border" />
-            </div>
-            <h4 className="boutique-display text-[28px] font-medium leading-[1.2] text-warm-fg">
-              {name}
-            </h4>
-            <p className="mt-3 flex-1 overflow-y-auto pr-1 text-[15px] leading-7 text-warm-soft">
-              {description}
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {tags.map(tag => (
-                <span
-                  key={`hover-${tag.name}`}
-                  className="rounded-full border border-warm-border bg-warm-page px-3 py-1 text-xs text-warm-soft"
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  onClick={event => {
+                    event.stopPropagation();
+                    goToNextImage();
+                  }}
+                  className="absolute right-3 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-warm-border/70 bg-warm-elevated/85 text-lg text-warm-soft backdrop-blur-sm transition hover:text-warm-fg"
+                  aria-label={`Next image of ${name}`}
                 >
-                  {tag.name}
-                </span>
-              ))}
-            </div>
+                  ›
+                </button>
+
+                <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-warm-border/65 bg-warm-elevated/85 px-3 py-1 backdrop-blur-sm">
+                  {images.map((image, indicatorIndex) => (
+                    <button
+                      type="button"
+                      key={`${image}-${indicatorIndex}`}
+                      onClick={event => {
+                        event.stopPropagation();
+                        setCurrentImageIndex(indicatorIndex);
+                      }}
+                      className={`h-2.5 rounded-full transition ${indicatorIndex === currentImageIndex ? 'w-7 bg-warm-fg' : 'w-2.5 bg-warm-muted/80 hover:bg-warm-soft'
+                        }`}
+                      aria-label={`View image ${indicatorIndex + 1} of ${name}`}
+                    />
+                  ))}
+                </div>
+              </>
+            ) : null}
           </div>
 
-          <div className="relative z-[30] mx-[-1rem] mt-0 flex min-h-[52px] shrink-0 items-center justify-end gap-5 border-t border-warm-border/60 bg-warm-elevated px-4 py-3 text-warm-muted transition duration-300 group-hover:border-warm-border group-hover:text-warm-fg">
-            <button
-              type="button"
-              onClick={() => window.open(sourceCodeLink, '_blank')}
-              className="inline-flex items-center gap-2 text-base transition hover:text-warm-fg"
+          <div
+            className="relative mt-4 flex min-h-0 flex-1 flex-col"
+            onMouseEnter={() => setIsFooterHovered(true)}
+          >
+            {/* relative z-10：默认叠在 translate 走的详情层之上，避免未 hover 时底层仍盖住 tag 底部 */}
+            <div className="relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-y-contain pb-4">
+              <h3 className="boutique-display line-clamp-2 text-[34px] font-medium leading-[1.2] text-warm-fg sm:text-[28px]">
+                {name}
+              </h3>
+              <p className="mt-2 text-[15px] leading-7 text-warm-muted">{description}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {tags.map(tag => (
+                  <span
+                    key={tag.name}
+                    className="rounded-full border border-warm-tag-border bg-warm-tag px-3 py-1 text-xs text-warm-soft"
+                  >
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className={`absolute inset-x-0 -top-[224px] bottom-[56px] flex flex-col rounded-2xl bg-warm-elevated px-5 pt-5 pb-0 shadow-[0_-14px_30px_rgba(0,0,0,0.08)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                isFooterHovered
+                  ? 'pointer-events-auto z-20 translate-y-0 opacity-100'
+                  : 'pointer-events-none z-0 translate-y-[115%] opacity-100'
+              }`}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-5 w-5"
-                aria-hidden="true"
-              >
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-              </svg>
-              <span>{sourceLabel}</span>
-            </button>
+              <div className="absolute left-0 right-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-warm-subtle to-transparent" />
+              <div className="mb-3 flex justify-center">
+                <span className="h-1.5 w-14 rounded-full bg-warm-border" />
+              </div>
+              <h4 className="boutique-display text-[28px] font-medium leading-[1.2] text-warm-fg">
+                {name}
+              </h4>
+              <p className="mt-3 flex-1 overflow-y-auto pr-1 text-[15px] leading-7 text-warm-soft">
+                {description}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {tags.map(tag => (
+                  <span
+                    key={`hover-${tag.name}`}
+                    className="rounded-full border border-warm-border bg-warm-page px-3 py-1 text-xs text-warm-soft"
+                  >
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-            {liveSiteLink ? (
+            <div className="relative z-[30] mx-[-1rem] mt-0 flex min-h-[52px] shrink-0 items-center justify-end gap-5 border-t border-warm-border/60 bg-warm-elevated px-4 py-3 text-warm-muted transition duration-300">
               <button
                 type="button"
-                onClick={() => window.open(liveSiteLink, '_blank')}
+                onClick={() => window.open(sourceCodeLink, '_blank')}
                 className="inline-flex items-center gap-2 text-base transition hover:text-warm-fg"
               >
                 <svg
@@ -119,12 +169,35 @@ const ProjectCard: React.FC<
                   className="h-5 w-5"
                   aria-hidden="true"
                 >
-                  <path d="M7 17 17 7" />
-                  <path d="M7 7h10v10" />
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                 </svg>
-                <span>{previewLabel}</span>
+                <span>{sourceLabel}</span>
               </button>
-            ) : null}
+
+              {liveSiteLink ? (
+                <button
+                  type="button"
+                  onClick={() => window.open(liveSiteLink, '_blank')}
+                  className="inline-flex items-center gap-2 text-base transition hover:text-warm-fg"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                  <span>{previewLabel}</span>
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
       </motion.div>
@@ -264,4 +337,4 @@ const Works = () => {
   );
 };
 
-export default SectionWrapper(Works, '');
+export default SectionWrapper(Works, 'project');

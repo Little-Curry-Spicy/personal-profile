@@ -5,6 +5,7 @@ const zh = {
     home: '首页',
     about: '关于我',
     work: '旅程',
+    project: '项目',
     contact: '联系',
   },
   theme: {
@@ -35,6 +36,9 @@ const zh = {
     hi: 'Hi，我是',
     hiEn: "Hi, I'm",
   },
+  github: {
+    title: 'GitHub 贡献图.',
+  },
 };
 
 const en = {
@@ -42,6 +46,7 @@ const en = {
     home: 'Home',
     about: 'About',
     work: 'Journey',
+    project: 'Project',
     contact: 'Contact',
   },
   theme: {
@@ -71,6 +76,9 @@ const en = {
   hero: {
     hi: 'Hi，我是',
     hiEn: "Hi, I'm",
+  },
+  github: {
+    title: 'GitHub Contributions.',
   },
 };
 

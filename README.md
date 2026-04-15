@@ -24,6 +24,7 @@
 | 国际化     | 中英文文案（`src/i18n`）                                          |
 | 主题       | 明暗模式（`src/context/ThemeContext.tsx`）                        |
 | 3D 与动效  | `@react-three/fiber`、`@react-three/drei`、`three`、Framer Motion |
+| About 技术徽章 | 关于我文案支持 `{{typescript}}` 这类占位符，自动渲染为带图标技术标签 |
 | 视觉基调  | 工作室感 boutique：暖奶油底、Fraunces 标题 + DM Sans 正文、柔和天蓝主按钮、顶部胶囊导航；首屏带轻线描云与黏土色柔光装饰（不替换真人头像与联系区地球） |
 | 联系表单   | [Web3Forms](https://web3forms.com/)，需配置访问密钥               |
 | SEO / 分享 | 构建时通过 `vite.config.js` 将环境变量写入 `index.html` 占位符    |
@@ -125,6 +126,9 @@ reactjs18-3d-portfolio/
 ```env
 # 站点绝对地址（无尾部斜杠），用于 OG 等
 VITE_SITE_URL=https://1996tsk.top
+
+# GoatCounter 统计端点（可选）；格式示例：https://your-code.goatcounter.com/count
+VITE_GOATCOUNTER_ENDPOINT=https://your-code.goatcounter.com/count
 
 # 联系表单：https://web3forms.com/ 申请后填入；未配置时表单会提示需配置
 VITE_WEB3FORMS_ACCESS_KEY=<your-web3forms-access-key>

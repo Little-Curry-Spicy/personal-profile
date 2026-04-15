@@ -15,6 +15,10 @@ export const navLinks: TNavLink[] = [
     title: '旅程',
   },
   {
+    id: 'project',
+    title: '项目',
+  },
+  {
     id: 'contact',
     title: '联系',
   },

@@ -47,6 +47,7 @@ export type SiteCatalog = {
     roles: [string, string];
     githubLabel: string;
     wechatLabel: string;
+    visitorLabel: string;
   };
   about: { h2: string; content: string; quote: string; quoteAttribution: string };
   experience: { title: string };
@@ -159,27 +160,27 @@ const skillGroupsEn: TSkillGroup[] = [
   },
   {
     title: 'Engineering & architecture',
-    icon: skillGroupsZh[1].icon,
-    accentColor: '#d97757',
-    items: skillGroupsZh[1].items,
-  },
-  {
-    title: 'Performance',
-    icon: skillGroupsZh[2].icon,
-    accentColor: '#c96442',
-    items: skillGroupsZh[2].items,
-  },
-  {
-    title: 'Web3',
     icon: skillGroupsZh[3].icon,
     accentColor: '#d97757',
     items: skillGroupsZh[3].items,
   },
   {
-    title: 'Backend collaboration',
+    title: 'Performance',
     icon: skillGroupsZh[4].icon,
     accentColor: '#c96442',
     items: skillGroupsZh[4].items,
+  },
+  {
+    title: 'Web3',
+    icon: skillGroupsZh[2].icon,
+    accentColor: '#d97757',
+    items: skillGroupsZh[2].items,
+  },
+  {
+    title: 'Backend collaboration',
+    icon: skillGroupsZh[1].icon,
+    accentColor: '#c96442',
+    items: skillGroupsZh[1].items,
   },
   {
     title: 'Testing & automation',
@@ -194,14 +195,15 @@ const zhCatalog: SiteCatalog = {
     roles: ['全栈 + Web3 + AI 探索者', ''],
     githubLabel: 'GitHub / Little-Curry-Spicy',
     wechatLabel: `微信 · ${config.links.wechatId}`,
+    visitorLabel: '访客',
   },
   about: {
     h2: '关于我.',
-    content: `我出生在河南农村。小时候村里没有一所完整的小学，我是在希望小学读到三年级；三年级之后只能去镇上继续读，家离镇上有几十公里，往返很吃辛苦。后来在镇上读了初中，可以住校，省心了不少。初中毕业我去了许昌读高中，高一、高二成绩还不错，常在年级前列；高三那年自己松懈了，贪玩了一些，最后去了一所普通本科，在安阳学自动化。
+    content: `我的技术栈以前端为核心：日常主要使用 {{react}}、{{vue3}}、{{typescript}}、{{vite}} 构建可维护、可扩展的业务系统，并通过组件化与分层设计控制复杂度；在需要更强 SSR 能力或更快工具链时，我会引入 {{nextjs}} 与 {{bun}} 做针对性优化。
 
-毕业后我做过一段时间电气。那行又累、安全风险也高，收入却一般，思来想去还是决定转行。我去了郑州，在达内参加前端培训——也正是在那里，我认识了现在的爱人。培训结束后，我进了一家小公司做前端：当时全公司只有我一个前端，没有现在这样的 AI 辅助，也不认识多少能请教的“大佬”，很多坑只能自己下班、周末一点点查资料、啃文档。幸运的是同事和后端伙伴愿意一起加班琢磨，老板也常鼓励我不要停下学习。
+在工程化与后端协作上，我偏向稳定且可持续演进的方案，长期采用 {{nodejs}} + {{nestjs}}、{{mysql}} + {{redis}}、{{prisma}}、{{docker}}。从接口规范、错误处理到部署流程，我都更关注“可观测、可回滚、可追踪”，确保项目在迭代中保持交付质量与协作效率。
 
-后来因为郑州的薪资天花板更明显，我来了杭州：收入比在郑州时好了不少，房价也更高，所以至今还租房住；但地铁方便、气候舒服，这座城市让我愿意长期待下去。从 2022 年起我在一家政企相关公司做前端，几年里陆续交付了不少项目；我也在一灯科技的课程里系统补过 Web3，结业后进入现在这家公司，做交易所相关方向。最近在研究 AI Agent，想把它稳定嵌进工作流里提效，也做过一些和 AI 相关的小项目。`,
+在 Web3 与性能方向，我持续投入 {{ethers}}、{{web3}}、{{solidity}}、{{hardhat}}、{{ipfs}}，并围绕 Core Web Vitals、WASM、Web Worker 与性能监控做长期实践。我的目标不是追求炫技，而是让系统在真实业务压力下依然保持稳定、流畅和可持续演进。`,
     quote: '千里之行，始于足下。',
     quoteAttribution: '——老子《道德经》',
   },
@@ -370,14 +372,15 @@ const enCatalog: SiteCatalog = {
     roles: ['Full-stack + Web3 + AI Explorer', ''],
     githubLabel: 'GitHub / Little-Curry-Spicy',
     wechatLabel: `WeChat · ${config.links.wechatId}`,
+    visitorLabel: 'visitors',
   },
   about: {
     h2: 'About.',
-    content: `I grew up in a village in Henan. We didn’t have a full primary school in the village, so I attended a Hope Primary School through third grade; after that I had to continue in the township school—dozens of kilometres from home, and the daily commute was exhausting. Later I did junior high in the same town and could board at school, which made things much easier. After junior high I went to Xuchang for senior high; in grades one and two my grades were solid and I was often near the top of the year. In my final year I eased up, had a bit too much fun, and ended up at an ordinary undergraduate programme in Anyang studying automation.
+    content: `My core stack is frontend-focused: I build maintainable, scalable products with {{react}}, {{vue3}}, {{typescript}}, and {{vite}}, using component-driven architecture and clear layering to keep complexity under control. When SSR or tooling speed matters, I introduce {{nextjs}} and {{bun}} to optimize delivery.
 
-After graduation I worked in electrical engineering for a while—the work was tiring, the safety risk was real, and the pay was only so-so, so I decided to change direction. I went to Zhengzhou and took a front-end bootcamp at Tarena—that’s also where I met my partner. When the course finished I joined a small company as the only front-end on the team: no AI assistants like today, not many “seniors” to ask, so I spent evenings and weekends reading docs and digging through problems on my own. I was lucky that colleagues and backend teammates were willing to grind through overtime with me, and my manager kept encouraging me not to stop learning.
+For engineering and backend collaboration, I prefer stable workflows built on {{nodejs}} + {{nestjs}}, {{mysql}} + {{redis}}, {{prisma}}, and {{docker}}. From API contracts and error handling to CI/CD and deployment, I prioritize observability, rollback safety, and team-wide consistency.
 
-Later the salary ceiling in Zhengzhou felt clearer, so I moved to Hangzhou—income improved a lot compared to Zhengzhou, but housing is pricier too, so I still rent; the metro is convenient, the climate suits me, and I’m happy to stay here for the long run. Since 2022 I’ve been doing front-end for a government/enterprise–oriented company and have shipped quite a few projects. I also took a structured Web3 course at Yideng Tech, then joined my current company on the exchange side. Recently I’ve been exploring AI agents—how to wire them into the workflow for real efficiency—and I’ve built a few small AI-related side projects.`,
+On Web3 and performance work, I actively ship with {{ethers}}, {{web3}}, {{solidity}}, {{hardhat}}, and {{ipfs}}, while continuously improving Core Web Vitals, WASM usage, Web Worker parallelism, and performance monitoring. My focus is practical: build systems that remain reliable, fast, and evolvable under real production pressure.`,
     quote: 'The journey of a thousand miles begins with one step.',
     quoteAttribution: '— Lao Tzu, Tao Te Ching',
   },
@@ -389,7 +392,7 @@ Later the salary ceiling in Zhengzhou felt clearer, so I moved to Hangzhou—inc
     groups: skillGroupsEn,
   },
   works: {
-    title: 'Selected work.',
+    title: 'Project.',
     content: `Open-source work you can run locally or with Docker (RAG assistant, résumé–JD matcher), plus a Flutter cross-platform OTC client sample. READMEs hold walkthroughs and UI shots—click a card image to browse captures.`,
     source: 'Source',
     preview: 'Live',

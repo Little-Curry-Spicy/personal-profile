@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from '@/pages/HomePage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { config } from '@/constants/config';
+import ClickFx from '@/components/atoms/ClickFx';
 
 const App = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <ClickFx />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />

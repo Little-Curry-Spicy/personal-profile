@@ -86,6 +86,55 @@ body {
   color: var(--color-fg);
 }
 
+html,
+body,
+#root {
+  cursor: pointer;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
+@keyframes click-snowflake-burst {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(var(--start-scale, 0.8));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--dx, 0px)),
+        calc(-50% + var(--dy, -70px))
+      )
+      rotate(var(--rotate, 0deg)) scale(var(--end-scale, 1.2));
+  }
+}
+
+.click-snowflake {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  color: color-mix(in oklab, var(--color-studio) 65%, white);
+  text-shadow: 0 0 12px color-mix(in oklab, var(--color-studio) 26%, transparent);
+  animation: click-snowflake-burst var(--duration, 780ms) cubic-bezier(0.2, 0.75, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.click-snowflake::before {
+  content: attr(data-char);
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: lowercase;
+  line-height: 1;
+}
+
 /**
  * 首页根容器：全幅背景图（public/v2osk-1Z2niiBPg5A-unsplash.jpg）
  * 宽幅山谷晨昏 + 雾与侧光；浅色叠奶油渐变、深色叠暗角，保证正文可读。
@@ -426,6 +475,11 @@ html:not(.dark) .home-section-strip::before {
 @media (prefers-reduced-motion: reduce) {
   .home-section-strip::before {
     animation: none !important;
+  }
+
+  .click-snowflake {
+    animation: none !important;
+    opacity: 0;
   }
 }
 
